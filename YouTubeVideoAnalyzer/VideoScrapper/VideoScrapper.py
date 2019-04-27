@@ -245,7 +245,14 @@ class VideoAnalyzer:
         self.video_like_count = 0 #video like count
         self.video_dislike_count = 0 #video dislike count
         self.video_view_count = 0 #video view count.
-    
+#         self.sfnlp_positive = 0#positive will be set in nlp module.
+#         self.sfnlp_neutral = 0#neutral will be set in nlp module.
+#         self.sfnlp_negative = 0#negative will be set in nlp module.
+#         self.tbnlp_positive = 0#positive will be set in nlp module.
+#         self.tblnp_neutral = 0#neutral will be set in nlp module.
+#         self.tblnp_negative = 0#negative will be set in nlp module.
+        
+        
     #setters and getters for all the class fields.    
     def setVideoId(self,video_id):
         self.video_id = video_id   
@@ -450,7 +457,7 @@ class VideoAnalyzer:
                         
 if __name__ == '__main__':
     model = DataModel()
-    model.connectDb()
+    #model.connectDb()
     #db = model.getConnection()#uncomment this function once data model is fixed.
     db = connectMongoDB()#can comment this function once data model is fixed.
     searchKeysList = DataModel.readMetaData(db)
