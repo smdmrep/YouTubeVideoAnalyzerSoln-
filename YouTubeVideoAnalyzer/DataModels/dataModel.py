@@ -83,10 +83,12 @@ class DataModel:
         try:
             db      =   self.client.youtubeVideoAnalyzerTest
             result  =   db[collectionName].find({})
-            for document in result:
-                pprint(document)
+            # for document in result:
+            #     pprint(document)
+            return result
         except:
             print("exception occured")
+            return None
 
 
     ########################## Insert Video Content to database ##########################
@@ -128,10 +130,85 @@ class DataModel:
             print(e)
 
 
+    
+    ########################## List search key details ############################
+    #......................... from searchKeyDetails collection ...................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/22/2019          
+    # Updated Date  : 
+    def getSearchkeyList(self):
+        try:
+            db      =   self.client.youtubeVideoAnalyzerTest
+            result  =   db["searchKeyDetails"].find({})
+            for document in result:
+                pprint(document)
+        except Exception as e:
+            print(e)
+
+
+    def getCaptions(self):
+        try:
+            db= self.client.youtubeVideoAnalyzerTest
+            result = db["productDetails"].find({}, { "_id": 0, "captions": 1,"video_id":2 })
+            db["productDetails"].update({}, {"$set": {"segmentedCaptions": ""}}, False, True)
+
+            return result
+        except Exception as e:
+            print(e)
+            return None
+
+
+    def updateCaptions(self,dataSet):
+        try:
+            db=self.client.youtubeVideoAnalyzerTest
+            for item in dataSet:
+                db["productDetails"].update(
+                    {"video_id": item["video_id"]},
+                    { 
+                        "$set": {
+                                "segmentedCaptions": item["captions"]
+                        }
+                    }
+                )
+            
+        except Exception as e:
+            print(e)        
+
+
+
+    def getSegmentedCaptions(self):
+        try:
+            db=self.client.youtubeVideoAnalyzerTest
+            result=db["productDetails"].find({},{"_id":0,"segmentedCaptions":1,"video_id":2})
+            return result
+        except Exception as e:
+            print(e)
+            return None
+
+
+
+    def updateDocumentLevelAnalysis(self,analyzedDataSet):
+        try:
+            db=self.client.youtubeVideoAnalyzerTest
+            for item in analyzedDataSet:
+                db["productDetails"].update(
+                    {"video_id": item["video_id"]},
+                    { 
+                        "$set": {
+                                "documentScore":item["documentScore"],
+                                "documentAspectList": item["documentAspectList"]
+                        }
+                    }
+                )
+            
+        except Exception as e:
+            print(e)
+
 
 
 # Calling this module..
 # Create DataModel object and call respective method.
-""" a = DataModel()
-a.connectDb()
-a.getCollectionResults("productDetails") """
+# a = DataModel()
+# a.connectDb()
+# a.getCaptions()
