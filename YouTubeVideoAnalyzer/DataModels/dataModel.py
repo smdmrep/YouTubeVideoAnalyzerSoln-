@@ -15,7 +15,7 @@ import gridfs
 from pymongo import MongoClient
 from pprint import pprint
 from random import randint
-
+from bson import json_util
 class DataModel:
     
     
@@ -206,6 +206,43 @@ class DataModel:
             print(e)
 
 
+    #Get the connection to the database.
+    def getConnection(self):
+        return self.client.youtubeVideoAnalyzerTest
+    
+    @staticmethod
+    def readMetaData(db):
+        searchKeysList = [] 
+        table = db.searchKeyDetails
+        searchKeys = table.find()
+        for searchKey in searchKeys:
+            searchKeysList.append(searchKey['searchKey'])
+        return searchKeysList
+    
+    #function for saving all the data mined for videos to database.
+    @staticmethod
+    def saveVideosInfo(db,searchKey,videosInfo):
+        #access the table.
+        productDetails = db.productDetails
+        
+        #delete the existing data.
+        #productDetails.delete_many({})
+        
+        productVideos = productDetails.find({"topic":searchKey})
+        
+        for productVideo in productVideos:
+            for videoInfo in videosInfo:
+                if productVideo['video_id'] == videoInfo['video_id']:
+                    videosInfo.remove(videoInfo)
+        
+        data = []
+        for videoInfo in videosInfo:
+            data.append(json_util.loads(videoInfo))
+            
+        #save all the documents to the database.
+        result = productDetails.insert_many(data)
+        
+        return result
 
 # Calling this module..
 # Create DataModel object and call respective method.
