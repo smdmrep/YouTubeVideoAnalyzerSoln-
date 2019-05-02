@@ -45,7 +45,7 @@ class DataModel:
     def getConnectionString(self):
         try:
             config = configparser.ConfigParser()
-            config.read("config.ini")
+            config.read("../../config.ini")
             userName =config["mongodbCluseterCredentials"]["userName"]
             password = config["mongodbCluseterCredentials"]["password"]
             hostName = config["mongodbCluseterCredentials"]["hostName"] 
@@ -236,17 +236,17 @@ class DataModel:
     def saveVideosInfo(db,searchKey,videosInfo):
         #access the table.
         productDetails = db.productDetails
-        
-        #delete the existing data.
-        #productDetails.delete_many({})
-        
+                
         productVideos = productDetails.find({"topic":searchKey})
         
+        #check if the video has already been uploaded in database. If yes, ignore it.
         for productVideo in productVideos:
-            for videoInfo in videosInfo:
-                if productVideo['video_id'] == videoInfo['video_id']:
-                    videosInfo.remove(videoInfo)
-        
+            for i in range(len(videosInfo)):
+                videoInfoLoad = json_util.loads(videosInfo[i])
+                if videoInfoLoad['video_id'] == productVideo['video_id']:
+                    del videosInfo[i]
+                    break
+                        
         data = []
         for videoInfo in videosInfo:
             data.append(json_util.loads(videoInfo))
