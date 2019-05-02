@@ -59,6 +59,7 @@
 #--------------< Import all the neccesary Libraries >-----------------
 from textblob import TextBlob
 from pycorenlp import StanfordCoreNLP
+from YouTubeVideoAnalyzer.DataModels.dataModel import DataModel
 import nltk.data
 
 #--------------< Using textblob libraries for sentiment analysis >-----------------
@@ -112,49 +113,70 @@ class stanfordNLP:
                     s["index"],
                     " ".join([t["word"] for t in s["tokens"]]),
                     s["sentimentValue"], s["sentiment"]))
-            return sentimentValue;
+            return sentimentValue
         except:
             print ("There was a problem in Standford NLP libraries!")
 
+    def generateSentenceLevelScore(self,opinion):
+        return "a"
 
-def main():
+
+def sentenceLevelAnalysis():
     try:
-        #--------< Test Stub for the NLP_Model.py module >-------
-        print("Test Stub for NLP_Model.py")
-        print("--------------------------")
+        dataModel = DataModel()
+        dataModel.connectDb()
+        segmentedCaptions = dataModel.getSegmentedCaptions()
+        analyzedDataSet=[]
+        for data in segmentedCaptions:
+            stanfordnlp = stanfordNLP()
+            stanfordnlp.sentimentAnalyserSF(data["segmentedCaptions"], verbose = False)
+            data["sentenceScore"]=stanfordnlp.generateSentenceLevelScore("a")
+            analyzedDataSet.append(data)
 
-        dotSepTxt = "This is very good day. But yesterday was bad. Tomorrow will be a wonderful day. Madhu is good boy. This is good DAy. "
-        tb = textBlob()
-        print(tb.sentimentAnalyserTB(dotSepTxt, verbose = False))
-        sf = stanfordNLP()
-        print(sf.sentimentAnalyserSF(dotSepTxt, verbose = False))
+        dataModel.updateSentenceLevelAnalysis(analyzedDataSet)
 
-        a = DataModel()
-        a.connectDb()
-        a.getCollectionResults("productDetails")
+    except Exception as e:
+        print(e)
 
-    #--------< Error Handling >-------
-    except IOError:
-        print('Handled Error: An error occured trying to read the file.')
+
+# def main():
+#     try:
+#         #--------< Test Stub for the NLP_Model.py module >-------
+#         print("Test Stub for NLP_Model.py")
+#         print("--------------------------")
+
+#         dotSepTxt = "This is very good day. But yesterday was bad. Tomorrow will be a wonderful day. Madhu is good boy. This is good DAy. "
+#         tb = textBlob()
+#         print(tb.sentimentAnalyserTB(dotSepTxt, verbose = False))
+#         sf = stanfordNLP()
+#         print(sf.sentimentAnalyserSF(dotSepTxt, verbose = False))
+
+#         a = DataModel()
+#         a.connectDb()
+#         a.getCollectionResults("productDetails")
+
+#     #--------< Error Handling >-------
+#     except IOError:
+#         print('Handled Error: An error occured trying to read the file.')
     
-    except ValueError:
-        print('Handled Error: Non-numeric data found in the file.')
+#     except ValueError:
+#         print('Handled Error: Non-numeric data found in the file.')
 
-    except NameError:
-        print("Handled Error: Name Error has occured - Variable not defined.")
+#     except NameError:
+#         print("Handled Error: Name Error has occured - Variable not defined.")
 
-    except ImportError:
-        print("Handled Error: Module not found")
+#     except ImportError:
+#         print("Handled Error: Module not found")
     
-    except EOFError:
-        print("Handled Error: EOF Error")
+#     except EOFError:
+#         print("Handled Error: EOF Error")
 
-    except KeyboardInterrupt:
-        print("Handled Error: Operation inturrupted by keyboard")
+#     except KeyboardInterrupt:
+#         print("Handled Error: Operation inturrupted by keyboard")
 
-    except:
-        print("Handled Error: An Unknown error occured.")
+#     except:
+#         print("Handled Error: An Unknown error occured.")
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 

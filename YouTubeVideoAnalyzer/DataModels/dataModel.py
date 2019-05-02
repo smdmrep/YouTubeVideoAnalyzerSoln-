@@ -206,6 +206,18 @@ class DataModel:
             print(e)
 
 
+    def updateSentenceLevelAnalysis(self,analyzedDataSet):
+        db=self.client.youtubeVideoAnalyzerTest
+        for item in analyzedDataSet:
+            db["productDetails"].update(
+                {"video_id": item["video_id"]},
+                    { 
+                        "$set": {
+                                "sentenceScore":item["documentScore"],
+                        }
+                    }
+                )
+
     #Get the connection to the database.
     def getConnection(self):
         return self.client.youtubeVideoAnalyzerTest

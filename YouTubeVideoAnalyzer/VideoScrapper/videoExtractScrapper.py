@@ -8,7 +8,7 @@ except ImportError:
     import urllib2 
 
 
-class   videoExtractScrapper():
+class   VideoExtractScrapper():
 
     ######################### Initialize ############################
     #............. self.url holds the url of video .................#
