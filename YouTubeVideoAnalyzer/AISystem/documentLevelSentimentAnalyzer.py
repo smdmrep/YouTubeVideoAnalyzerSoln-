@@ -181,15 +181,16 @@ class DocumentLevelSentimentAnalyzer():
             analyzedDataSet =[]
             for data in segmentedCaptions:
                 #   preProcessedText = documentAnalyzer.preProcessing(data["segmentedCaptions"])
-                tokenizedWords=documentAnalyzer.tokenizeWords(data["segmentedCaptions"])
-                taggedWords = documentAnalyzer.partOfSpeechRecognition(tokenizedWords)
-                aspectList = documentAnalyzer.aspectExtraction(taggedWords)
-                opinion = documentAnalyzer.identifyOpinionWords(taggedWords,aspectList)
-                data["documentScore"]=documentAnalyzer.generateDocumentLevelScore(opinion)
-                data["documentAspectList"]=opinion
-                count=count+1
-                analyzedDataSet.append(data)
-            
+                if "segmentedCaptions" in data:
+                    tokenizedWords=documentAnalyzer.tokenizeWords(data["segmentedCaptions"])
+                    taggedWords = documentAnalyzer.partOfSpeechRecognition(tokenizedWords)
+                    aspectList = documentAnalyzer.aspectExtraction(taggedWords)
+                    opinion = documentAnalyzer.identifyOpinionWords(taggedWords,aspectList)
+                    data["documentScore"]=documentAnalyzer.generateDocumentLevelScore(opinion)
+                    data["documentAspectList"]=opinion
+                    count=count+1
+                    analyzedDataSet.append(data)
+                    #dataModel.updateDocumentLevelAnalysis(analyzedDataSet)
             dataModel.updateDocumentLevelAnalysis(analyzedDataSet)
         
         except Exception as e:
@@ -240,11 +241,31 @@ class DocumentLevelSentimentAnalyzer():
             return None
         
         
+    def generateOverallScores(self):
+        try:
+            dataModel = DataModel()
+            dataModel.connectDb()
+            searchKeyResults = dataModel.getSearchkeyList()
+            for key in searchKeyResults:
+                documentScoreList = dataModel.getDocumentScores(key["searchKey"])
+                
+                positiveScoreArray = documentScoreList[0]["positive"]
+                negativeScoreArray = documentScoreList[1]["negative"]
+                neutralScoreArray = documentScoreList[2]["neutral"]
+                count = documentScoreList[3]["count"]
 
+                positiveScore = 0 if count == 0 else sum(positiveScoreArray)/count
+                negativeScore = 0 if count == 0 else sum(negativeScoreArray)/count
+                neutralScore = 0 if count == 0 else  sum(neutralScoreArray)/count
+                dataModel.insertDocumentOverallScore({"searchKey": key["searchKey"],"documentPositive":round(positiveScore, 2),"documentNegative" : round(negativeScore, 2),"documentNeutral": round(neutralScore, 2) }) 
+        except Exception as e:
+            print(e)
+        
 # def main():
 
 #     documentAnalyzer=DocumentLevelSentimentAnalyzer()
 #     documentAnalyzer.performDocumentAnalysis()
+#     documentAnalyzer.generateOverallScores()
 
 
 # if __name__ == "__main__":

@@ -42,7 +42,7 @@ class DataProcessor:
 
 #    datProcessor= DataProcessor()
 
-#    datProcessor.processUnsegmentedTextFromSpeech(dataSet)
+#    datProcessor.processUnsegmentedTextFromSpeech()
     
 
 # if __name__ == "__main__":

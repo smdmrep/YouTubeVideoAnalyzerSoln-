@@ -26,6 +26,7 @@ class Wrapper():
         #perform document analysis
         documentAnalyzer=DocumentLevelSentimentAnalyzer()
         documentAnalyzer.performDocumentAnalysis()
+        documentAnalyzer.generateOverallScores()
 
 
         #perfor sentiment analysis

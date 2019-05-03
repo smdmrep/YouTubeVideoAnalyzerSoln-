@@ -45,7 +45,7 @@ class DataModel:
     def getConnectionString(self):
         try:
             config = configparser.ConfigParser()
-            config.read("../../config.ini")
+            config.read("config.ini")
             userName =config["mongodbCluseterCredentials"]["userName"]
             password = config["mongodbCluseterCredentials"]["password"]
             hostName = config["mongodbCluseterCredentials"]["hostName"] 
@@ -86,8 +86,8 @@ class DataModel:
             # for document in result:
             #     pprint(document)
             return result
-        except:
-            print("exception occured")
+        except Exception as e:
+            print(e)
             return None
 
 
@@ -141,17 +141,19 @@ class DataModel:
         try:
             db      =   self.client.youtubeVideoAnalyzerTest
             result  =   db["searchKeyDetails"].find({})
-            for document in result:
-                pprint(document)
+            # for document in result:
+            #     pprint(document)
+            return result
         except Exception as e:
             print(e)
+            return None
 
 
     def getCaptions(self):
         try:
             db= self.client.youtubeVideoAnalyzerTest
             result = db["productDetails"].find({}, { "_id": 0, "captions": 1,"video_id":2 })
-            db["productDetails"].update({}, {"$set": {"segmentedCaptions": ""}}, False, True)
+            #db["productDetails"].update({}, {"$set": {"segmentedCaptions": ""}}, False, True)
 
             return result
         except Exception as e:
@@ -222,6 +224,45 @@ class DataModel:
     def getConnection(self):
         return self.client.youtubeVideoAnalyzerTest
     
+
+
+    def insertDocumentOverallScore(self,documentOverallScore):
+        db = self.client.youtubeVideoAnalyzerTest
+        db["youtubeVideoAnalyzedScore"].insert_one(documentOverallScore)
+
+
+
+    def getDocumentScores(self,searchKey):
+        db = self.client.youtubeVideoAnalyzerTest
+        documentScoreList=db["productDetails"].find({"topic":searchKey},{"_id":0,"documentScore":1,"documentAspectList":2})
+        positiveScore =[]
+        negativeScore =[]
+        neutralityScore = []
+        result=[]
+        count =0
+        for score in documentScoreList:
+            if "documentAspectList" in score:
+                if len(score["documentAspectList"])!=0:
+                    count = count+1
+                    positiveScore.append(score["documentScore"]["positive"])
+                    negativeScore.append(score["documentScore"]["negative"])
+                    neutralityScore.append(score["documentScore"]["neutrality"])        
+
+
+        result.append({"positive":positiveScore})
+        result.append({"negative":negativeScore})
+        result.append({"neutral":neutralityScore})
+        result.append({"count":count})
+        return result    
+        
+
+
+
+    # def insertYouTubeVideoAnalyzedScores(self):
+    #     db = self.client.youtubeVideoAnalyzerTest
+    #     pass
+        
+
     @staticmethod
     def readMetaData(db):
         searchKeysList = [] 
