@@ -1,0 +1,141 @@
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="preloader">
+            <div class="spinner-layer pl-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <p>Please wait...</p>
+    </div>
+</div>
+<!-- #END# Page Loader -->
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" href="index.php">Youtube Video Analyser</a>
+        </div>
+    </div>
+</nav>
+<!-- #Top Bar -->
+<section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+        </div>
+        <!-- #User Info -->
+        <!-- Menu -->
+        <div class="menu">
+            <ul class="list">
+                <li class="header">MAIN NAVIGATION</li>
+                <li>
+                    <a href="/home">
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="/product">
+                        <i class="material-icons">widgets</i>
+                        <span>Product Analysis</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- #Menu -->
+    </aside>
+    <!-- #END# Left Sidebar -->
+    <!-- Right Sidebar -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2></h2>
+        </div>
+        
+        <!-- Advanced Select -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            PRODUCT ANALYSIS
+                            <small>Select the product from the below list to analyze</a></small>
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <form method="GET" action="/product_analysis">
+                            <div class="row clearfix">
+                                <div class="col-md-3">
+                                    <select name="_id" class="form-control show-tick" data-live-search="true">
+                                        {{#each products}}
+                                            <option value="{{this._id}}">{{this.searchKey}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn bg-indigo waves-effect" type="submit">
+                                <i class="material-icons">trending_up</i>
+                                <span>ANALYSE</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Advanced Select -->
+    </div>
+</section>
+
+<!-- Jquery Core Js -->
+<script src="plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core Js -->
+<script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+<!-- Select Plugin Js -->
+<script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+<!-- Slimscroll Plugin Js -->
+<script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+<!-- Waves Effect Plugin Js -->
+<script src="plugins/node-waves/waves.js"></script>
+
+<!-- Jquery CountTo Plugin Js -->
+<script src="plugins/jquery-countto/jquery.countTo.js"></script>
+
+<!-- Morris Plugin Js -->
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/morrisjs/morris.js"></script>
+
+<!-- ChartJs -->
+<script src="plugins/chartjs/Chart.bundle.js"></script>
+
+<!-- Flot Charts Plugin Js -->
+<script src="plugins/flot-charts/jquery.flot.js"></script>
+<script src="plugins/flot-charts/jquery.flot.resize.js"></script>
+<script src="plugins/flot-charts/jquery.flot.pie.js"></script>
+<script src="plugins/flot-charts/jquery.flot.categories.js"></script>
+<script src="plugins/flot-charts/jquery.flot.time.js"></script>
+
+<!-- Sparkline Chart Plugin Js -->
+<script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+<!-- Custom Js -->
+<script src="js/admin.js"></script>
+<script src="js/pages/index.js"></script>
+
+<!-- Demo Js -->
+<script src="js/demo.js"></script>

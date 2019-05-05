@@ -1,0 +1,21 @@
+{
+  "name": "youtubevideoanalyser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.6.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "mongodb": "^3.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  },
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "author": "Madhu Jayarama",
+  "license": "ISC"
+}
