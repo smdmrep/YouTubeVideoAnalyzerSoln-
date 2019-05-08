@@ -2,7 +2,7 @@
 # video2text.py : Converts the video from url to text file(.txt)          #
 # ver           : 1.0                                                     #
 # OS            : Windows 10 (64 bit)                                     #
-# Author        : Lepakshi Datta Dupakuntl                                #
+# Author        : Lepakshi Datta Dupakuntla                               #
 #                 ldupakun@syr.edu                                        #
 ###########################################################################
 
