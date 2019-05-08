@@ -57,8 +57,8 @@ class DataModel:
             dbName = config["mongodbCluseterCredentials"]["dbName"]
             connectionString ="mongodb+srv://"+userName+":"+password+"@"+hostName+"/"+dbName+"?retryWrites=true"
             return connectionString
-        except:
-            print("exception occured!")
+        except Exception as e:
+            print(e)
 
 
 
@@ -154,6 +154,14 @@ class DataModel:
             return None
 
 
+
+
+    ########################## List caption  details ##############################
+    #......................... from productDetails collection ...................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/22/2019          
+    # Updated Date  : 
     def getCaptions(self):
         try:
             db= self.client.youtubeVideoAnalyzerTest
@@ -166,6 +174,13 @@ class DataModel:
             return None
 
 
+
+    ########################### update captions & set segmented captions ##############################
+    #......................... to productDetails collection ..........................................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/22/2019          
+    # Updated Date  : 
     def updateCaptions(self,dataSet):
         try:
             db=self.client.youtubeVideoAnalyzerTest
@@ -184,6 +199,12 @@ class DataModel:
 
 
 
+    ########################### get segmented captions ##############################
+    #......................... from productDetails collection ......................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/22/2019          
+    # Updated Date  : 
     def getSegmentedCaptions(self):
         try:
             db=self.client.youtubeVideoAnalyzerTest
@@ -195,6 +216,12 @@ class DataModel:
 
 
 
+    ########################### update document(aspect) level analysis ##############################
+    #......................... to  productDetails collection .......................................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/22/2019          
+    # Updated Date  : 
     def updateDocumentLevelAnalysis(self,analyzedDataSet):
         try:
             db=self.client.youtubeVideoAnalyzerTest
@@ -213,6 +240,12 @@ class DataModel:
             print(e)
 
 
+    ########################### update sentence level analysis#######################
+    #......................... to productDetails collection ......................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/22/2019          
+    # Updated Date  : 
     def updateSentenceLevelAnalysis(self,analyzedDataSet):
         db=self.client.youtubeVideoAnalyzerTest
         for item in analyzedDataSet:
@@ -231,12 +264,27 @@ class DataModel:
     
 
 
+
+    ########################### insert document(aspect) overall score##############
+    #......................... to productDetails collection ......................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/22/2019          
+    # Updated Date  : 
     def insertDocumentOverallScore(self,documentOverallScore):
         db = self.client.youtubeVideoAnalyzerTest
         db["youtubeVideoAnalyzedScore"].insert_one(documentOverallScore)
 
 
 
+
+
+    ########################### list document(aspect) score.#######################
+    #......................... from productDetails collection ......................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/22/2019          
+    # Updated Date  : 
     def getDocumentScores(self,searchKey):
         db = self.client.youtubeVideoAnalyzerTest
         documentScoreList=db["productDetails"].find({"topic":searchKey},{"_id":0,"documentScore":1,"documentAspectList":2})
