@@ -10,6 +10,11 @@ PACKAGE_PARENT = '..'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
 sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT))) """
 
+
+from pkg_resources import Requirement, resource_filename
+configurationFile = resource_filename(Requirement.parse("YouTubeVideoAnalyzer"),"config.ini")
+
+
 import configparser
 import gridfs
 from pymongo import MongoClient
@@ -45,7 +50,7 @@ class DataModel:
     def getConnectionString(self):
         try:
             config = configparser.ConfigParser()
-            config.read("config.ini")
+            config.read(configurationFile)
             userName =config["mongodbCluseterCredentials"]["userName"]
             password = config["mongodbCluseterCredentials"]["password"]
             hostName = config["mongodbCluseterCredentials"]["hostName"] 
