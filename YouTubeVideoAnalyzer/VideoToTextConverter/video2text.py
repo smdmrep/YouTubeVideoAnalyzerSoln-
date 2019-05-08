@@ -7,11 +7,6 @@
 ###########################################################################
 
 
-# Packages / Libraries / Tools to be installed or downloaded :
-# ------------------------------------------------------------
-#
-
-
 from __future__ import unicode_literals
 import youtube_dl
 import speech_recognition as sr
