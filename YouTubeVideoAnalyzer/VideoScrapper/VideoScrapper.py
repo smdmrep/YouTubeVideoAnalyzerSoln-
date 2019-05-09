@@ -23,8 +23,8 @@ from oauth2client.tools import argparser, run_flow
 import pymongo
 from youtube_transcript_api import YouTubeTranscriptApi
 from bson import json_util
-sys.path.append('/YouTubeVideoAnalyzer/DataModels/')
-from dataModel import *
+#sys.path.append('/YouTubeVideoAnalyzer/DataModels/')
+from YouTubeVideoAnalyzer.DataModels.dataModel import DataModel
 
 CLIENT_SECRETS_FILE = "client_secret.json"
 
@@ -454,21 +454,46 @@ class VideoAnalyzer:
             videosInfo = VideoAnalyzer.getVideosInfo(searchKey,videosWithExceptions)
             DataModel.saveVideosInfo(db,searchKey,videosInfo)
         return videosWithExceptions
-                        
-if __name__ == '__main__':
-    model = DataModel()
-    #model.connectDb()
-    #db = model.getConnection()#uncomment this function once data model is fixed.
-    db = connectMongoDB()#can comment this function once data model is fixed.
-    searchKeysList = DataModel.readMetaData(db)
-    argparser.add_argument("--language", help="Caption track language", default="en")
-    argparser.add_argument("--action", help="Action", default="download")
+
+
+
+    def videoExtract(self):
+        model = DataModel()
+        #model.connectDb()
+        #db = model.getConnection()#uncomment this function once data model is fixed.
+        db = connectMongoDB()#can comment this function once data model is fixed.
+        searchKeysList = DataModel.readMetaData(db)
+        argparser.add_argument("--language", help="Caption track language", default="en")
+        argparser.add_argument("--action", help="Action", default="download")
     
-    args = argparser.parse_args()
+        args = argparser.parse_args()
     
-    client = get_authenticated_service(args)
+        client = get_authenticated_service(args)
     
-    videosWithExceptions = VideoAnalyzer.getVideosInfoBySearchWords(db,searchKeysList)
+        videosWithExceptions = VideoAnalyzer.getVideosInfoBySearchWords(db,searchKeysList)    
+
+
+
+
+
+
+
+
+
+# if __name__ == '__main__':
+#     model = DataModel()
+#     #model.connectDb()
+#     #db = model.getConnection()#uncomment this function once data model is fixed.
+#     db = connectMongoDB()#can comment this function once data model is fixed.
+#     searchKeysList = DataModel.readMetaData(db)
+#     argparser.add_argument("--language", help="Caption track language", default="en")
+#     argparser.add_argument("--action", help="Action", default="download")
+    
+#     args = argparser.parse_args()
+    
+#     client = get_authenticated_service(args)
+    
+#     videosWithExceptions = VideoAnalyzer.getVideosInfoBySearchWords(db,searchKeysList)
 
 
 

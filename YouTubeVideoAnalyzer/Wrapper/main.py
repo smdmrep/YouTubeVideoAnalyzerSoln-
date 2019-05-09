@@ -1,5 +1,5 @@
 
-from YouTubeVideoAnalyzer.VideoScrapper import VideoScrapper
+from YouTubeVideoAnalyzer.VideoScrapper.VideoScrapper import VideoAnalyzer
 from YouTubeVideoAnalyzer.VideoScrapper.videoExtractScrapper import VideoExtractScrapper
 from YouTubeVideoAnalyzer.VideoToTextConverter import *
 from YouTubeVideoAnalyzer.DataProcessor.dataProcessor import DataProcessor
@@ -37,6 +37,12 @@ class Wrapper():
     def performYouTubeVideoAnalysis(self):
         
         #perform video extraction from you tube API. Call out videoExtractScrapper.py for exception
+        videoAnalyzer = VideoAnalyzer()
+        videoAnalyzer.videoExtract()
+
+
+        #perform video to text.
+
 
         #perform data processing of unsegmented data.. Calling DataProcessor from dataProcessor.py
         dataProcessor = DataProcessor()
@@ -50,6 +56,10 @@ class Wrapper():
 
 
         #perform sentiment analysis
+        stanfordnlp = stanfordNLP()
+        stanfordnlp.sentenceLevelAnalyzer()
+
+
 
 
 
