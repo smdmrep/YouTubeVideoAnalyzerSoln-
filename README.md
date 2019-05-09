@@ -18,7 +18,7 @@ We extract the content of youtube videos followed by the processing and training
 
 
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
 ## Setting up the project environment:-
 
 
@@ -27,8 +27,8 @@ We extract the content of youtube videos followed by the processing and training
 Required Files and python packages:
 
 
-VideoScrapper using youtube API
-...............................
+### VideoScrapper using youtube API
+
 
 	1)	
 	2)
@@ -37,8 +37,8 @@ VideoScrapper using youtube API
 	5)
 
 
-Video to Text Converter:
-........................
+### Video to Text Converter:
+
 	1)
 	2)
 	3)
@@ -46,15 +46,15 @@ Video to Text Converter:
 	5)
 
 
-Data PreProcessor
-.................
+### Data PreProcessor
+
 	
 	1) Run python -m pip install urllib
 
 
 
-DataModel using MongoDb driver in python
-........................................
+### DataModel using MongoDb driver in python (DataModel.py)
+
 	
 	1) Run python -m pip install pymongo
 	2) Run python -m pip install dnspython
@@ -62,8 +62,7 @@ DataModel using MongoDb driver in python
 
 
 
-AISystem - Document Level Analysis (documentLevelSentimentAnalyzer.py) : Follow these instruction
-.....................................................................
+### AISystem - Document Level Analysis (documentLevelSentimentAnalyzer.py) : Follow these instruction
 
 	1) Run python -m pip install nltk --user
 	
@@ -80,8 +79,8 @@ AISystem - Document Level Analysis (documentLevelSentimentAnalyzer.py) : Follow 
 
 
 
-AISystem - Sentence Level Analysis(NLP_Model.py) : Follow these setup instruction.
-.................................................
+### AISystem - Sentence Level Analysis(NLP_Model.py) : Follow these setup instruction.
+
 
 	1) 	curl https://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip -O https://nlp.stanford.edu/software/stanford-english-corenlp-2018-10-05-models.jar -O
 		(Download Stanford CoreNLP - Built on Java Language)
@@ -111,8 +110,8 @@ AISystem - Sentence Level Analysis(NLP_Model.py) : Follow these setup instructio
 
 
 
-Visualizer
-.........
+### Visualizer
+
 	
 	1)	Dependencies:
 			async
@@ -130,8 +129,8 @@ Visualizer
 
 
 
-Initial Setup: Follow these instruction for project as package.
-.................
+### Initial Setup: Follow these instruction for project as package.
+
 
 	1)	CD C:/path_to_project/YouTubeVideoAnalyzerSoln-
 	2)	Run python config.py to initialize configuration files.
@@ -146,10 +145,10 @@ Initial Setup: Follow these instruction for project as package.
 
 
 
-## Author
+#### Author
 
 
-### [Guruprasanna Hegde](https://github.com/guruprasannahegde)
+#### [Guruprasanna Hegde](https://github.com/guruprasannahegde)
 
 
 
