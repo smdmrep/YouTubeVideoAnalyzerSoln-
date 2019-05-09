@@ -37,6 +37,8 @@ Required Files and python packages:
 	5)
 
 
+
+
 ### Video to Text Converter:
 
 	1)
@@ -46,10 +48,14 @@ Required Files and python packages:
 	5)
 
 
+
+
 ### Data PreProcessor
 
 	
 	1) Run python -m pip install urllib
+
+
 
 
 
@@ -59,6 +65,8 @@ Required Files and python packages:
 	1) Run python -m pip install pymongo
 	2) Run python -m pip install dnspython
 	
+
+
 
 
 
@@ -74,6 +82,7 @@ Required Files and python packages:
 			nltk.download('wordnet')
 			nltk.download('sentiwordnet')
 			
+
 
 
 
@@ -110,6 +119,7 @@ Required Files and python packages:
 
 
 
+
 ### Visualizer
 
 	
@@ -124,6 +134,7 @@ Required Files and python packages:
 	3)	Run npm install
 	
 	4) 	Run npm start - to start a server. 
+
 
 
 
