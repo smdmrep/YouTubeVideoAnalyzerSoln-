@@ -1,3 +1,30 @@
+/*
+###########################################################################
+# index.js      : Displays the analysis on to web app using node.js       #        
+# ver           : 1.0                                                     #
+# Authors       : Madhu Jayarama                                          #
+###########################################################################
+
+# Dependencies :
+# ------------------------------------------------------------
+# * async
+# * express
+# * express-handlebars
+# * mongodb
+#
+# How to Run :
+# ------------------------------------------------------------
+# $ npm install
+#   (installs the Dependencies)
+#
+# $ npm start
+#   (starts the server)
+#
+# Maintenance History
+# -------------------
+# ver 1.0 : 4 May 2019
+*/
+
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
