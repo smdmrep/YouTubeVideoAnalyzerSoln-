@@ -76,33 +76,17 @@ Install the following API's using pip command.
 	python -m pip install youtube-dl
 	23) youtube-transcript-api   0.1.3
 	python -m pip install youtube-transcript-api
-	24) appier                   1.18.7
-	python -m pip install appier
-	25) cachetools               3.1.0
-	python -m pip install cachetools
-	26) certifi                  2019.3.9
-	python -m pip install certifi
-	27) cffi                     1.12.3
-	python -m pip install cffi
-	28) chardet                  3.0.4
-	python -m pip install chardet
-	29) decorator                4.3.2
-	python -m pip install decorator
-	30) dnspython                1.16.0
-	python -m pip install dnspython
-	31) ffmpeg                   1.4
-	python -m pip install ffmpeg
-	32) ffprobe                  0.5
-	python -m pip install ffprobe
+
 
 
 ### Video to Text Converter:
 
-	1)
-	2)
-	3)
-	4)
-	5)
+	1)Run python -m pip install SpeechRecognition
+	2)Run python -m pip install youtube_dl
+	3)Run python -m pip install math
+	4)Run python -m pip install soundfile
+	5)Run python -m pip install unicode_literals
+	6)Run python -m pip install pytube
 
 
 
