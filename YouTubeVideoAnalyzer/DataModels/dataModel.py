@@ -378,9 +378,24 @@ class DataModel:
         result.append({"negative":negativeScore})
         result.append({"neutral":neutralityScore})
         result.append({"count":count})
-        return result    
-        
+        return result
 
+
+
+
+    ########################### update the captions got from speech converted text. #######################
+    #......................... to productDetails collection ......................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   05/03/2019
+    # Updated Date  :
+    def updateConvertedCaptionsFromVideo(self,data):
+        try:
+            db = self.client.youtubeVideoAnalyzerTest
+
+            db["productDetails"].update_one({"video_id": data["video_id"]},{"$set": {"captions":data["captions"]}})
+        except Exception as e:
+            print(e)
 
 
     # def insertYouTubeVideoAnalyzedScores(self):
