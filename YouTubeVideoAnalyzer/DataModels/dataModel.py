@@ -239,6 +239,13 @@ class DataModel:
             print(e)
 
 
+
+    ########################### list out sentence score for each individual video. ##############################
+    #......................... from   productDetails collection .......................................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   05/02/2019          
+    # Updated Date  :
     def getSentenceScores(self,searchKey): 
         db = self.client.youtubeVideoAnalyzerTest
         sentenceScoreList=db["productDetails"].find({"topic":searchKey},{"_id":0,"sentenceLevelScore":1})
@@ -263,6 +270,12 @@ class DataModel:
 
 
 
+    ########################### update overall sentence score for entire product. ##############################
+    #......................... to   productDetails collection .......................................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   05/02/2019          
+    # Updated Date  :
     def updateSentenceOverallScore(self,sentenceLevelScore):
         db = self.client.youtubeVideoAnalyzerTest
         db["youtubeVideoAnalyzedScore"].update(
@@ -278,6 +291,12 @@ class DataModel:
 
 
 
+    ########################### Redundant... ##############################
+    #......................... not in use.......................................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   05/02/2019          
+    # Updated Date  :
     def updateOverallSentenceLevelScore(self,overallSentenceScore):
         db=self.client.youtubeVideoAnalyzerTest
         for item in overallSentenceScore:
@@ -290,6 +309,13 @@ class DataModel:
                     }
                 )
 
+
+    ########################### update sentence score for each individual video ##############################
+    #.........................  from productDetails collection.......................................#
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   05/02/2019          
+    # Updated Date  :
     def updateSentenceLevelAnalysis(self,analyzedDataSet):
         db=self.client.youtubeVideoAnalyzerTest
         for item in analyzedDataSet:
