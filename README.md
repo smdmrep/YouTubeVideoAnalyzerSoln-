@@ -157,8 +157,6 @@ Required Files and python packages:
 
 
 #### Author
-
-
 #### [Guruprasanna Hegde](https://github.com/guruprasannahegde)
 
 
