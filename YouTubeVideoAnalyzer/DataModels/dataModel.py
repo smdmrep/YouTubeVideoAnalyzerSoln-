@@ -46,7 +46,6 @@ class DataModel:
     # Author        :   Guru
     # Created Date  :   04/22/2019          
     # Updated Date  : 
-
     def getConnectionString(self):
         try:
             config = configparser.ConfigParser()

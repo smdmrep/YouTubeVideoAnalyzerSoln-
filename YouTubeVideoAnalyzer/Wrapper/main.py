@@ -10,10 +10,30 @@ from YouTubeVideoAnalyzer.AISystem.documentLevelSentimentAnalyzer import Documen
 
 class Wrapper():
 
+
+    ######################### Initialize ############################
+    #............. .................................................#
+    #    
+    #
+    #****************************************************************#
+    # Author        :   Ganesh
+    # Created Date  :   05/02/2019          
+    # Updated Date  : 
     def __init__(self):
         pass
     
 
+
+    ######################### Perform Youtube video analysis. ############################
+    #........................ Extract videos and its captions from youtube...............#
+    #........................ Convert video to audio and then to text if scraper cannot extract captions for it..#
+    #........................ Process unsegmented data to segmented data.................#
+    #........................ Perform document level analysis............................#
+    #........................ Perform sentence level analysis............................#    
+    #****************************************************************#
+    # Author        :   Ganesh
+    # Created Date  :   05/02/2019          
+    # Updated Date  :
     def performYouTubeVideoAnalysis(self):
         
         #perform video extraction from you tube API. Call out videoExtractScrapper.py for exception
@@ -29,7 +49,7 @@ class Wrapper():
         documentAnalyzer.generateOverallScores()
 
 
-        #perfor sentiment analysis
+        #perform sentiment analysis
 
 
 

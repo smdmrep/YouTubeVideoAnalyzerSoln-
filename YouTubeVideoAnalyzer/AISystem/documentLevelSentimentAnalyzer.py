@@ -11,9 +11,28 @@ from YouTubeVideoAnalyzer.DataModels.dataModel import DataModel
 class DocumentLevelSentimentAnalyzer():
 
 
+    ######################### Initialize ############################
+    #............. .................................................#
+    #    
+    #
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  : 
     def __init__(self):
         pass
     
+
+
+
+    ######################### Preprocessing of the raw data ############################
+    #........................ Currently not in use.....................................#
+    #........................ Removes all stop words in the string using nltk.corpus...#    
+    #
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  : 
     def preProcessing(self,data):
         try:        
             data = data.lower()
@@ -26,6 +45,14 @@ class DocumentLevelSentimentAnalyzer():
 
         
 
+
+    ######################### Tokenize the segmentedcaption ############################
+    #........................ Take each sentence and tokenize them from entire paragraph of segmented captions...#    
+    #
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  : 
     def tokenizeWords(self,segmentedCaptions):
         try:            
             tokenizedWords={}
@@ -41,6 +68,15 @@ class DocumentLevelSentimentAnalyzer():
             print(e)
             return None
 
+
+
+    ######################### POS tagger ############################
+    #........................ tag all words with assosciated parts of speech...#    
+    #........................ using nltk.postag
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  : 
     def partOfSpeechRecognition(self,tokenizedWords):
         try:
             inputTupples = ast.literal_eval(tokenizedWords)
@@ -54,6 +90,14 @@ class DocumentLevelSentimentAnalyzer():
             print(e)
             return None
 
+
+    ######################### Aspect extraction. ############################
+    #........................ Find all occurences of Noun, Proper Noun ...#    
+    #........................ using pos tagged text from partOfSpeechRecognition(tokenizedWords) method.
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  : 
     def aspectExtraction(self,outputPost):
         try:    
             inputTupples = ast.literal_eval(outputPost)
@@ -88,6 +132,14 @@ class DocumentLevelSentimentAnalyzer():
 
 
 
+
+    ######################### Orient the aspect list. ############################
+    #........................ check whether they are more positive or more negative...#    
+    #........................ using sentiwornet.
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  : 
     def orientation(self,inputWord): 
         try:
             wordSynset=wordnet.synsets(inputWord)
@@ -103,7 +155,13 @@ class DocumentLevelSentimentAnalyzer():
             return None
 
 
-
+    ######################### Identify the opinion words. ############################
+    #........................ handle negative wordset like don't, can't etc...#    
+    #........................ using Adjective (JJR), Adverb(RRB) either comparitive or superlative.
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  :
     def identifyOpinionWords(self,posTagged,aspectList):
 
         try:
@@ -169,6 +227,14 @@ class DocumentLevelSentimentAnalyzer():
 
 
 
+
+    ######################### Perform document(aspect level analysis) ############################
+    #........................ entry point of the module...#    
+    #........................ get segmented captions and perform document level analysis and perform bulk update of each individual score.
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  :
     def performDocumentAnalysis(self):
         try:
             dataModel = DataModel()
@@ -199,6 +265,11 @@ class DocumentLevelSentimentAnalyzer():
 
 
 
+    ######################### Generate document level score based on list of all individual video score list############################
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  :
     def generateDocumentLevelScore(self,opinion):
         try:
 
@@ -240,7 +311,13 @@ class DocumentLevelSentimentAnalyzer():
             print(e)
             return None
         
-        
+
+
+    ######################### Generate document level score for entire product.############################
+    #****************************************************************#
+    # Author        :   Guru
+    # Created Date  :   04/25/2019          
+    # Updated Date  :        
     def generateOverallScores(self):
         try:
             dataModel = DataModel()
