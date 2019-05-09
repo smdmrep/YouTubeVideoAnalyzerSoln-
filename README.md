@@ -28,15 +28,72 @@ Required Files and python packages:
 
 
 ### VideoScrapper using youtube API
+Install the following API's using pip command.
 
-
-	1)	
-	2)
-	3)
-	4)
-	5)
-
-
+	1) google-api-python-client 1.7.8
+	python -m pip install google-api-python-client
+	2) google-auth              1.6.3
+	python -m pip install google-auth
+	3) google-auth-httplib2     0.0.3
+	python -m pip install google-auth-httplib2
+	4) google-auth-oauthlib     0.3.0
+	python -m pip install google-auth-oauthlib
+	5) httplib2                 0.12.1
+	python -m pip install httplib2
+	6) idna                     2.8
+	python -m pip install idna
+	7) oauth2client             4.1.3
+	python -m pip install oauth2client
+	8) oauthlib                 3.0.1
+	python -m pip install oauthlib
+	9) pip                      19.1.1
+	python -m pip install pip
+	10) pyasn1                   0.4.5
+	python -m pip install pyasn1
+	11) pyasn1-modules           0.2.4
+	python -m pip install pyasn1-modules
+	12) pycparser                2.19
+	python -m pip install pycparser
+	13) pymongo                  3.7.2
+	python -m pip install pymongo
+	14) requests                 2.21.0
+	python -m pip install requests
+	15) requests-oauthlib        1.2.0
+	python -m pip install requests-oauthlib
+	16) rsa                      4.0
+	python -m pip install rsa
+	17) setuptools               40.6.2
+	python -m pip install setuptools
+	18) six                      1.12.0
+	python -m pip install six
+	19) Unidecode                1.0.23
+	python -m pip install Unidecode
+	20) uritemplate              3.0.0
+	python -m pip install uritemplate
+	21) urllib3                  1.24.1
+	python -m pip install urllib3
+	22) youtube-dl               2019.4.30
+	python -m pip install youtube-dl
+	23) youtube-transcript-api   0.1.3
+	python -m pip install youtube-transcript-api
+	24) appier                   1.18.7
+	python -m pip install appier
+	25) cachetools               3.1.0
+	python -m pip install cachetools
+	26) certifi                  2019.3.9
+	python -m pip install certifi
+	27) cffi                     1.12.3
+	python -m pip install cffi
+	28) chardet                  3.0.4
+	python -m pip install chardet
+	29) decorator                4.3.2
+	python -m pip install decorator
+	30) dnspython                1.16.0
+	python -m pip install dnspython
+	31) ffmpeg                   1.4
+	python -m pip install ffmpeg
+	32) ffprobe                  0.5
+	python -m pip install ffprobe
 
 
 ### Video to Text Converter:
