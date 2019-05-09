@@ -85,8 +85,7 @@ Install the following API's using pip command.
 	2)Run python -m pip install youtube_dl
 	3)Run python -m pip install math
 	4)Run python -m pip install soundfile
-	5)Run python -m pip install unicode_literals
-	6)Run python -m pip install pytube
+	5)Run python -m pip install pytube
 
 
 
