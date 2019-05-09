@@ -28,13 +28,31 @@ Required Files and python packages:
 
 
 ### VideoScrapper using youtube API
+Install the following API's using pip command.
 
-
-	1)	
-	2)
-	3)
-	4)
-	5)
+	1) google-api-python-client 1.7.8
+	2) google-auth              1.6.3
+	3) google-auth-httplib2     0.0.3
+	4) google-auth-oauthlib     0.3.0
+	5) httplib2                 0.12.1
+	6) idna                     2.8
+	7) oauth2client             4.1.3
+	8) oauthlib                 3.0.1
+	9) pip                      19.1.1
+	10) pyasn1                   0.4.5
+	11) pyasn1-modules           0.2.4
+	12) pycparser                2.19
+	13) pymongo                  3.7.2
+	14) requests                 2.21.0
+	15) requests-oauthlib        1.2.0
+	16) rsa                      4.0
+	17) setuptools               40.6.2
+	18) six                      1.12.0
+	19) Unidecode                1.0.23
+	20) uritemplate              3.0.0
+	21) urllib3                  1.24.1
+	22) youtube-dl               2019.4.30
+	23) youtube-transcript-api   0.1.3
 
 
 
