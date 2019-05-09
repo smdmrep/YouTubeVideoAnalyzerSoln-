@@ -1,25 +1,25 @@
 # YouTubeVideoAnalyzerSoln-
 
 
-#Project Idea:
+##Project Idea:
   The objective of our project is to perform sentimental analysis on the youtube videos to determine the sustainability of the product in the market. In extension to this, the opinions of NEWS channels in youtube toward the public figures are outlined.
 
 
-#Project Description:
+##Project Description:
 Due to the fast growing internet, Youtube has become one of the top social media for every topic. It offers a wide variety of user-generated and corporate media videos which ranges from educational to entertainment. Available content includes video clips, TV show clips, music videos, short and documentary films, audio recordings, movie trailers, live streams, and other content such as video blogging, short original videos, and educational videos. Most of the content on YouTube is uploaded by individuals, but media corporations including CBS, the BBC, Vevo, and Hulu offer some of their material via YouTube as part of the YouTube partnership program. Because of its tremendous data, mining and processing them is a very challenging task.  
 
 Analysis of the content of the platform as a whole is not deterministic and impractical, an attempt is made towards analyzing the contents dedicated towards tech products from technology-focused videos.
 
 We extract the content of youtube videos followed by the processing and training of the data produced by conversion of video to text. In our approach, we use NLP (Natural Language Processing) algorithms to achieve the objective.
 
-#Significance of Project:
+##Significance of Project:
   Analyzation will provide a probability of the product success which is drawn from the reviews of youtube content providers. (Example: Samsung S10)
 
 
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#Setting up the project environment:-
+##Setting up the project environment:-
 
 
 
@@ -142,6 +142,14 @@ Initial Setup: Follow these instruction for project as package.
 
 
 
+
+
+
+
+## Author
+
+
+### [Guruprasanna Hegde](https://github.com/guruprasannahegde)
 
 
 
