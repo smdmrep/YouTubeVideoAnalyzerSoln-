@@ -1,7 +1,7 @@
 
 from YouTubeVideoAnalyzer.VideoScrapper.VideoScrapper import VideoAnalyzer
 from YouTubeVideoAnalyzer.VideoScrapper.videoExtractScrapper import VideoExtractScrapper
-from YouTubeVideoAnalyzer.VideoToTextConverter import *
+from YouTubeVideoAnalyzer.VideoToTextConverter.video2text import VideoToText 
 from YouTubeVideoAnalyzer.DataProcessor.dataProcessor import DataProcessor
 from YouTubeVideoAnalyzer.AISystem.NLP_Model import textBlob
 from YouTubeVideoAnalyzer.AISystem.NLP_Model import stanfordNLP
@@ -42,7 +42,8 @@ class Wrapper():
 
 
         #perform video to text.
-
+        videoToText = VideoToText()
+        videoToText.convertVideoToText()
 
         #perform data processing of unsegmented data.. Calling DataProcessor from dataProcessor.py
         dataProcessor = DataProcessor()

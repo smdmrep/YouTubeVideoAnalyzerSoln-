@@ -2,9 +2,7 @@
 # NLP_Model.py  : Provides functions to preform Sentiment analysis        #        
 # ver           : 1.0                                                     #
 # OS            : Windows 10 (64 bit)                                     #
-# Author        : Ganesh Mamatha Sheshappa                                #
-#                 gmamatha@syr.edu                                        #
-#                 +1 (315)-378-7890                                       #
+# Authors       : Ganesh Mamatha Sheshappa & Swathi Maruthi Ram           #
 ###########################################################################
 
 # Package Operations:

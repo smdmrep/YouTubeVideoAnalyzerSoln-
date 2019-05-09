@@ -30,7 +30,7 @@ class DocumentLevelSentimentAnalyzer():
     #........................ Removes all stop words in the string using nltk.corpus...#    
     #
     #****************************************************************#
-    # Author        :   Guru
+    # Author        :   Sowmya Padmanabhi
     # Created Date  :   04/25/2019          
     # Updated Date  : 
     def preProcessing(self,data):
@@ -50,7 +50,7 @@ class DocumentLevelSentimentAnalyzer():
     #........................ Take each sentence and tokenize them from entire paragraph of segmented captions...#    
     #
     #****************************************************************#
-    # Author        :   Guru
+    # Author        :   Sowmya Padmanabhi
     # Created Date  :   04/25/2019          
     # Updated Date  : 
     def tokenizeWords(self,segmentedCaptions):
@@ -137,7 +137,7 @@ class DocumentLevelSentimentAnalyzer():
     #........................ check whether they are more positive or more negative...#    
     #........................ using sentiwornet.
     #****************************************************************#
-    # Author        :   Guru
+    # Author        :   Sowmya Padmanabhi
     # Created Date  :   04/25/2019          
     # Updated Date  : 
     def orientation(self,inputWord): 
@@ -267,7 +267,7 @@ class DocumentLevelSentimentAnalyzer():
 
     ######################### Generate document level score based on list of all individual video score list############################
     #****************************************************************#
-    # Author        :   Guru
+    # Author        :   Sowmya Padmanabhi
     # Created Date  :   04/25/2019          
     # Updated Date  :
     def generateDocumentLevelScore(self,opinion):
@@ -315,7 +315,7 @@ class DocumentLevelSentimentAnalyzer():
 
     ######################### Generate document level score for entire product.############################
     #****************************************************************#
-    # Author        :   Guru
+    # Author        :   Sowmya Padmanabhi
     # Created Date  :   04/25/2019          
     # Updated Date  :        
     def generateOverallScores(self):
