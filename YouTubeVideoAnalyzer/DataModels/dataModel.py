@@ -239,12 +239,57 @@ class DataModel:
             print(e)
 
 
-    ########################### update sentence level analysis#######################
-    #......................... to productDetails collection ......................#
-    #****************************************************************#
-    # Author        :   Guru
-    # Created Date  :   04/22/2019          
-    # Updated Date  : 
+    def getSentenceScores(self,searchKey): 
+        db = self.client.youtubeVideoAnalyzerTest
+        sentenceScoreList=db["productDetails"].find({"topic":searchKey},{"_id":0,"sentenceLevelScore":1})
+        positiveScore =[]
+        negativeScore =[]
+        neutralityScore = []
+        result=[]
+        count =0
+        for score in sentenceScoreList:
+            if "sentenceLevelScore" in score:
+                if len(score["sentenceLevelScore"]) !=0:
+                    count = count+1
+                    positiveScore.append(score["sentenceLevelScore"]["positive"])
+                    negativeScore.append(score["sentenceLevelScore"]["negative"])
+                    neutralityScore.append(score["sentenceLevelScore"]["neutrality"])
+
+        result.append({"positive":positiveScore})
+        result.append({"negative":negativeScore})
+        result.append({"neutrality":neutralityScore})
+        result.append({"count":count})
+        return result
+
+
+
+    def updateSentenceOverallScore(self,sentenceLevelScore):
+        db = self.client.youtubeVideoAnalyzerTest
+        db["youtubeVideoAnalyzedScore"].update(
+                    {"searchKey": sentenceLevelScore["searchKey"]},
+                    { 
+                        "$set": {
+                                "sentencePositive":sentenceLevelScore["sentencePositive"],
+                                "sentenceNegative": sentenceLevelScore["sentenceNegative"],
+                                "sentenceNeutral":sentenceLevelScore["sentenceNeutral"]
+                        }
+                    }
+                )
+
+
+
+    def updateOverallSentenceLevelScore(self,overallSentenceScore):
+        db=self.client.youtubeVideoAnalyzerTest
+        for item in overallSentenceScore:
+            db["youtubeVideoAnalyzedScore"].update(
+                {"Samsung Galaxy S10": item["Samsung Galaxy S10"]},
+                    { 
+                        "$set": {
+                                "sentenceLevelScore":item["sentenceLevelScore"]
+                        }
+                    }
+                )
+
     def updateSentenceLevelAnalysis(self,analyzedDataSet):
         db=self.client.youtubeVideoAnalyzerTest
         for item in analyzedDataSet:
@@ -252,10 +297,12 @@ class DataModel:
                 {"video_id": item["video_id"]},
                     { 
                         "$set": {
-                                "sentenceScore":item["documentScore"],
+                                "sentenceLevelScore":item["sentenceLevelScore"]
                         }
                     }
                 )
+
+
 
     #Get the connection to the database.
     def getConnection(self):

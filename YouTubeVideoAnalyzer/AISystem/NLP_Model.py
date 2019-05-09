@@ -59,8 +59,9 @@
 #--------------< Import all the neccesary Libraries >-----------------
 from textblob import TextBlob
 from pycorenlp import StanfordCoreNLP
-from YouTubeVideoAnalyzer.DataModels.dataModel import DataModel
 import nltk.data
+import sys
+from dataModel import *
 
 #--------------< Using textblob libraries for sentiment analysis >-----------------
 class textBlob:
@@ -84,6 +85,13 @@ class textBlob:
         except:
             print ("There was a problem in TextBlob libraries!")
 
+#Analysis of the sentiment percentage for the Stanford NLP libraries
+def countOcc(lst, x): 
+    count = 0
+    for ele in lst: 
+        if (ele == x): 
+            count = count + 1
+    return count
 
 #--------------< Using Stanford Core-NLP libraries for sentiment analysis >-----------------
 class stanfordNLP:
@@ -120,6 +128,28 @@ class stanfordNLP:
     def generateSentenceLevelScore(self,opinion):
         return "a"
 
+    def sentimentPercentageCalculate(self, sf_analysis_list):
+        try:
+            sentence_count_sf = len(sf_analysis_list)
+            sf_pos_count = countOcc(sf_analysis_list, 3) + countOcc(sf_analysis_list,4)
+            sf_neg_count = countOcc(sf_analysis_list, 0) + countOcc(sf_analysis_list, 1)
+            sf_neu_count = countOcc(sf_analysis_list, 2)
+            sentiment_result = []
+            if(sentence_count_sf == 0):
+               return None
+            else:
+                sentiment_result.append(sf_pos_count/sentence_count_sf*100)
+                sentiment_result.append(sf_neg_count/sentence_count_sf*100)
+                sentiment_result.append(sf_neu_count/sentence_count_sf*100)
+            return sentiment_result
+        except:
+            print ("There was a problem in sentiment percentage calculater for Stanford Analysis!")
+
+    def sentenceLevelAnalyzer(self):
+        try:
+            sentenceLevelAnalysis()
+        except:
+            print ("There was a problem in sentiment percentage calculater for Stanford Analyzer!")
 
 def sentenceLevelAnalysis():
     try:
@@ -127,56 +157,83 @@ def sentenceLevelAnalysis():
         dataModel.connectDb()
         segmentedCaptions = dataModel.getSegmentedCaptions()
         analyzedDataSet=[]
+        overallSentResult = [0,0,0]
+        stanfordnlp = stanfordNLP()
+        count = 0
         for data in segmentedCaptions:
-            stanfordnlp = stanfordNLP()
-            stanfordnlp.sentimentAnalyserSF(data["segmentedCaptions"], verbose = False)
-            data["sentenceScore"]=stanfordnlp.generateSentenceLevelScore("a")
-            analyzedDataSet.append(data)
-
+            if "segmentedCaptions" in data:
+                #analyzedDataSet=[]
+                sentimentResults = []
+                print("Processed :", count, " files ")
+                sf_analysis_list = stanfordnlp.sentimentAnalyserSF(data["segmentedCaptions"], verbose = False)
+                # PositiveScore NegativeScore NeutralScore
+                sentimentResults = stanfordnlp.sentimentPercentageCalculate(sf_analysis_list)
+                if(sentimentResults != None):
+                    count = count + 1
+                    data["sentenceLevelScore"] = {"positive":sentimentResults[0], "negative":sentimentResults[1], "neutrality":sentimentResults[2]} 
+                    analyzedDataSet.append(data)
+                    #dataModel.updateSentenceLevelAnalysis(analyzedDataSet)
+        
         dataModel.updateSentenceLevelAnalysis(analyzedDataSet)
-
+        generateOverallSentenceScore(dataModel)
     except Exception as e:
         print(e)
 
+def generateOverallSentenceScore(dataModel):
+    searchKeyResults = dataModel.getSearchkeyList()
+    for key in searchKeyResults:
+        sentenceScoreList = dataModel.getSentenceScores(key["searchKey"])
+        positiveScoreArray = sentenceScoreList[0]["positive"]
+        negativeScoreArray = sentenceScoreList[1]["negative"]
+        neutralScoreArray = sentenceScoreList[2]["neutrality"]
+        count = sentenceScoreList[3]["count"]
+            
+        positiveScore = 0 if count == 0 else sum(positiveScoreArray)/count
+        negativeScore = 0 if count == 0 else sum(negativeScoreArray)/count
+        neutralScore = 0 if count == 0 else  sum(neutralScoreArray)/count
+        dataModel.updateSentenceOverallScore({"searchKey": key["searchKey"],"sentencePositive":round(positiveScore, 2),"sentenceNegative" : round(negativeScore, 2),"sentenceNeutral": round(neutralScore, 2) })
 
-# def main():
-#     try:
-#         #--------< Test Stub for the NLP_Model.py module >-------
-#         print("Test Stub for NLP_Model.py")
-#         print("--------------------------")
 
-#         dotSepTxt = "This is very good day. But yesterday was bad. Tomorrow will be a wonderful day. Madhu is good boy. This is good DAy. "
-#         tb = textBlob()
-#         print(tb.sentimentAnalyserTB(dotSepTxt, verbose = False))
-#         sf = stanfordNLP()
-#         print(sf.sentimentAnalyserSF(dotSepTxt, verbose = False))
+#def main():
+#    try:
+#        sentenceLevelAnalysis()
+#        print("Done")
+#        ##--------< Test Stub for the NLP_Model.py module >-------
+#        #print("Test Stub for NLP_Model.py")
+#        #print("--------------------------")
 
-#         a = DataModel()
-#         a.connectDb()
-#         a.getCollectionResults("productDetails")
+#        #dotSepTxt = "This is very good day. But yesterday was bad. Tomorrow will be a wonderful day. Madhu is good boy. This is good DAy. "
+#        #tb = textBlob()
+#        #print(tb.sentimentAnalyserTB(dotSepTxt, verbose = False))
+#        #sf = stanfordNLP()
+#        #print(sf.sentimentAnalyserSF(dotSepTxt, verbose = False))
+
+#        #a = DataModel()
+#        #a.connectDb()
+#        #a.getCollectionResults("productDetails")
 
 #     #--------< Error Handling >-------
-#     except IOError:
-#         print('Handled Error: An error occured trying to read the file.')
+#    except IOError:
+#        print('Handled Error: An error occured trying to read the file.')
     
-#     except ValueError:
-#         print('Handled Error: Non-numeric data found in the file.')
+#    except ValueError:
+#        print('Handled Error: Non-numeric data found in the file.')
 
-#     except NameError:
-#         print("Handled Error: Name Error has occured - Variable not defined.")
+#    except NameError:
+#        print("Handled Error: Name Error has occured - Variable not defined.")
 
-#     except ImportError:
-#         print("Handled Error: Module not found")
+#    except ImportError:
+#        print("Handled Error: Module not found")
     
-#     except EOFError:
-#         print("Handled Error: EOF Error")
+#    except EOFError:
+#        print("Handled Error: EOF Error")
 
-#     except KeyboardInterrupt:
-#         print("Handled Error: Operation inturrupted by keyboard")
+#    except KeyboardInterrupt:
+#        print("Handled Error: Operation inturrupted by keyboard")
 
-#     except:
-#         print("Handled Error: An Unknown error occured.")
+#    except:
+#        print("Handled Error: An Unknown error occured.")
 
-# if __name__ == "__main__":
-#     main()
+#if __name__ == "__main__":
+#    main()
 
