@@ -198,6 +198,7 @@ Install the following API's using pip command.
 
 #### Author
 #### [Guruprasanna Hegde](https://github.com/guruprasannahegde)
+#### [Madhu Jayarama](https://madhujgowda.github.io)
 
 
 
